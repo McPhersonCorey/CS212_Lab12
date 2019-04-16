@@ -1,33 +1,33 @@
 public class BinaryTree {
     // instance variables
     private Node root;
-    public int lowestLevel = 0;
-    public int lowestLeftNode;
-    public int numberOfNodes = 0;
+    private int lowestLevel = 0;
+    private int lowestLeftNode;
+    private int numberOfNodes = 0;
 
     public BinaryTree( )
     {
         root = null;
     }
 
-    public BinaryTree( int value )
+    BinaryTree(int value)
     {
         root = new Node( value );
     }
 
-    public void attachLeft( BinaryTree bt )
+    void attachLeft(BinaryTree bt)
     {
         if( root.getLeft( ) == null ) // no left child
             root.setLeft( bt.root );
     }
 
-    public void attachRight( BinaryTree bt )
+    void attachRight(BinaryTree bt)
     {
         if( root.getRight( ) == null ) // no right child
             root.setRight( bt.root );
     }
 
-    public static BinaryTree combine( BinaryTree left, BinaryTree right, int value )
+    static BinaryTree combine(BinaryTree left, BinaryTree right, int value)
     {
         BinaryTree bt = new BinaryTree( value );
         bt.attachLeft( left );
@@ -71,7 +71,7 @@ public class BinaryTree {
     }
 
     // traverses the tree in pre order
-    public void inOrder( )
+    void inOrder()
     {
         inOrder( root );
     }
@@ -91,7 +91,7 @@ public class BinaryTree {
     }
 
     // traverses the tree in pre order
-    public void postOrder( )
+    void postOrder()
     {
         postOrder( root );
     }
@@ -113,15 +113,15 @@ public class BinaryTree {
         return lowestLeftNode;
     }
 
-    public int getLowestLeftNode() {
+    int getLowestLeftNode() {
         return getLowestLeftNode(root);
     }
 
-    public int getNumberOfNodes() {
+    int getNumberOfNodes() {
         return numberOfNodes;
     }
 
-    int countNumberOfLeaves(Node nd) {
+    private int countNumberOfLeaves(Node nd) {
         if (nd == null)
             return 0;
         if (nd.getLeft() == null && nd.getRight() == null)
@@ -136,5 +136,34 @@ public class BinaryTree {
     int getNumberOfLevels () {
         return lowestLevel;
     }
+
+     private void levelOrder(Node root)
+    {
+        int height = getNumberOfLevels();
+        int i;
+        for (i = 1; i <= height; i++)
+        {
+            printCurrentLevel(root, i);
+            System.out.println();
+        }
+    }
+    /* Print nodes at a given level */
+    private void printCurrentLevel(Node root, int level)
+    {
+        if (root == null)
+            return;
+        if (level == 1)
+            System.out.println(root.getData());
+        else if (level > 1)
+        {
+            printCurrentLevel(root.getLeft(), level - 1);
+            printCurrentLevel(root.getRight(), level - 1);
+        }
+    }
+
+    void printLevelOrder() {
+        levelOrder(root);
+    }
+
 
 }

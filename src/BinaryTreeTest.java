@@ -33,6 +33,9 @@ public class BinaryTreeTest {
         System.out.println("Number of nodes: " + bt.getNumberOfNodes());
         System.out.println("Number of leaves: " + bt.getNumberOfLeaves());
         System.out.println("Number of levels in tree: " + bt.getNumberOfLevels());
+        bt.printLevelOrder();
     }
+
+
 
 }
